@@ -3,6 +3,7 @@ services:
   spark-master:
     image: ${USERNAME}/spark-master:${TAG}
     container_name: spark-master
+    hostname: spark-master.bdb
     ports:
       - "8083:8080"
       - "7077:7077"
@@ -14,6 +15,7 @@ services:
   spark-worker-1:
     image: ${USERNAME}/spark-worker:${TAG}
     container_name: spark-worker-1
+    hostname: spark-worker-1.bdb
     depends_on:
       - spark-master
     ports:
@@ -22,8 +24,30 @@ services:
       - "SPARK_MASTER=spark://spark-master:7077"
     networks:
       - spark-net
+    volumes:
+    - work:/data
+
+  #spark-worker-2:
+  #  image: ${USERNAME}/spark-worker:${TAG}
+  #  container_name: spark-worker-2
+  #  hostname: spark-worker-2.bdb
+  #  depends_on:
+  #    - spark-master
+  #  ports:
+  #    - "8094:8081"
+  #  environment:
+  #    - "SPARK_MASTER=spark://spark-master:7077"
+  #  networks:
+  #    - spark-net
+  #  volumes:
+  #  - work:/data
 
 networks:
   spark-net:
     external:
       name: spark-net
+
+volumes:
+  work:
+    external:
+      name: work
