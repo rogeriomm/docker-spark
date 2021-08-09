@@ -9,8 +9,15 @@ ENV SPARK_APPLICATION_JAR_NAME application-1.0
 
 COPY template.sh /
 
-RUN apk add --no-cache openjdk11 maven\
-      && chmod +x /template.sh \
+#RUN apk add --no-cache openjdk11 maven\
+#      && chmod +x /template.sh \
+#      && mkdir -p /app \
+#      && mkdir -p /usr/src/app
+
+RUN apt-get install -y \
+      openjdk-11-jdk maven
+
+RUN chmod +x /template.sh \
       && mkdir -p /app \
       && mkdir -p /usr/src/app
 

@@ -9,6 +9,8 @@ services:
       - "7077:7077"
     environment:
       - INIT_DAEMON_STEP=setup_spark
+    volumes:
+      - work:/share
     networks:
       - spark-net
 
@@ -22,10 +24,10 @@ services:
       - "8093:8081"
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
+    volumes:
+      - work:/share
     networks:
       - spark-net
-    volumes:
-    - work:/data
 
   #spark-worker-2:
   #  image: ${USERNAME}/spark-worker:${TAG}

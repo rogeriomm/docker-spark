@@ -3,8 +3,6 @@ ARG TAG
 
 FROM $USERNAME/spark-base:$TAG
 
-RUN /usr/bin/python3.7 -m pip install --upgrade pip
-
 LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
 
 COPY worker.sh /
