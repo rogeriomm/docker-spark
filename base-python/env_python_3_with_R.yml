@@ -21,6 +21,8 @@ dependencies:
   - altair
   - vega_datasets
   - pip
+  - delta
+  - plotly
   - r-base=3
   - r-data.table
   - r-evaluate

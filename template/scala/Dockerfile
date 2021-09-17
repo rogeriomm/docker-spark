@@ -3,8 +3,6 @@ ARG TAG
 
 FROM $USERNAME/spark-submit:$TAG
 
-LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
-
 ARG SBT_VERSION
 ENV SBT_VERSION=${SBT_VERSION:-1.3.12}
 

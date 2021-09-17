@@ -1,9 +1,7 @@
 ARG USERNAME
 ARG TAG
 
-FROM $USERNAME/spark-base:$TAG
-
-LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
+FROM $USERNAME/spark-base-python:$TAG
 
 COPY worker.sh /
 

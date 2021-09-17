@@ -3,8 +3,6 @@ ARG TAG
 
 FROM $USERNAME/spark-base:$TAG
 
-LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
-
 ENV SPARK_MASTER_NAME spark-master
 ENV SPARK_MASTER_PORT 7077
 ENV SPARK_APPLICATION_JAR_LOCATION /app/application.jar

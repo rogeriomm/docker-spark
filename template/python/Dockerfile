@@ -3,8 +3,6 @@ ARG TAG
 
 FROM $USERNAME/spark-submit:$TAG
 
-LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
-
 COPY template.sh /
 
 # Copy the requirements.txt first, for separate dependency resolving and downloading

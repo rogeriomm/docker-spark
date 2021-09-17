@@ -3,8 +3,6 @@ ARG TAG
 
 FROM $USERNAME/spark-submit:$TAG
 
-LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
-
 ENV SPARK_APPLICATION_JAR_NAME application-1.0
 
 COPY template.sh /
