@@ -7,17 +7,25 @@ ENV INIT_DAEMON_STEP spark_master_init
 ENV HADOOP_VERSION=3.3.1
 ENV SPARK_VERSION=3.1.2
 
+ENV HADOOP_HOME=/opt/hadoop-$HADOOP_VERSION
+ENV SPARK_HOME=/opt/spark
+ENV PATH=$PATH:$SPARK_HOME/bin:$HADOOP_HOME/bin
+
+ENV SPARK_DIST_CLASSPATH="$HADOOP_HOME/etc/hadoop/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/hdfs/lib/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/yarn/lib/*:$HADOOP_HOME/share/hadoop/yarn/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/tools/lib/*"
+
 ENV LANG=en_US.UTF-8 \
     LC_ALL=en_US.UTF-8 \
     JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 \
     TZ=America/Sao_Paulo
 
+ARG DEBIAN_FRONTEND=noninteractive
+
+WORKDIR /opt
+
 COPY wait-for-step.sh /
 COPY execute-step.sh /
 COPY finish-step.sh /
-RUN chmod +x *.sh
-
-ARG DEBIAN_FRONTEND=noninteractive
+RUN chmod +x /*.sh
 
 RUN apt-get update && apt-get upgrade -y
 
@@ -34,7 +42,8 @@ RUN apt-get install -y \
       ack \
       locales \
       iptraf \
-      tcpdump
+      tcpdump \
+      htop
 
 RUN locale-gen en_US.UTF-8
 
@@ -67,12 +76,6 @@ RUN set -x \
     gpg --verify /tmp/hadoop.tar.gz.asc \
     && tar -xvf /tmp/hadoop.tar.gz -C /opt/ \
     && rm /tmp/hadoop.tar.gz*
-
-ENV HADOOP_HOME=/opt/hadoop-$HADOOP_VERSION
-ENV SPARK_HOME=/spark
-ENV PATH=$PATH:$SPARK_HOME/bin:$HADOOP_HOME/bin
-
-ENV SPARK_DIST_CLASSPATH="$HADOOP_HOME/etc/hadoop/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/hdfs/lib/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/yarn/lib/*:$HADOOP_HOME/share/hadoop/yarn/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/tools/lib/*"
 
 ### Download JAVA packages
 RUN cd spark ; \

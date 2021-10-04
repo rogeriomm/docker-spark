@@ -3,8 +3,6 @@ ARG TAG
 
 FROM $USERNAME/spark-base:$TAG
 
-LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
-
 COPY master.sh /
 
 ENV SPARK_MASTER_PORT 7077
