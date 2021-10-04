@@ -1,4 +1,6 @@
 *~
 .idea/
 *.tgz
-./spark-git
+spark-git/
+*.tar.gz
+*.gz.asc
